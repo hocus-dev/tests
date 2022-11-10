@@ -1,0 +1,6 @@
+image:
+  file: hocus.Dockerfile
+tasks:
+  - name: hello world
+    init: echo "init" > init.txt
+    command: echo "command" > command.txt
