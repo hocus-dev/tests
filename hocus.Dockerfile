@@ -23,7 +23,7 @@ RUN useradd hocus -m -s /bin/bash && \
 RUN sed -i 's|#PasswordAuthentication yes|PasswordAuthentication no|g' /etc/ssh/sshd_config && \
     # the following line will fail if ChallengeResponseAuthentication is present in the file
     $(! cat /etc/ssh/sshd_config | grep -q "ChallengeResponseAuthentication") && \
-    echo "ChallengeResponseAuthentication yes" >> /etc/ssh/sshd_config
+    echo "ChallengeResponseAuthentication no" >> /etc/ssh/sshd_config
 RUN mkdir -p /home/hocus/.ssh && \
     chown -R hocus:hocus /home/hocus/.ssh && \
     # this public key is automatically removed when a workspace starts
