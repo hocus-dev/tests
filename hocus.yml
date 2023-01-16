@@ -3,7 +3,7 @@ image:
   buildContext: ./resources
 tasks:
   - name: hello world
-    init: echo "init" > init.txt
+    init: test -z "this will cause an error"
     command: echo "command" > command.txt
   - name: second task
     init: echo "init2" > init2.txt
