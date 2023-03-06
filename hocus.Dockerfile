@@ -1,6 +1,6 @@
 FROM ubuntu:22.04
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     curl \
     dialog \
     init \
@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
     sudo \
     util-linux \
     vim \
-    git-all
+    git-all && rm -rf /var/lib/apt/lists/*
 RUN systemctl enable ssh
 COPY ./docker/dnssetup /etc/init.d/dnssetup
 RUN chmod 755 /etc/init.d/dnssetup && \
