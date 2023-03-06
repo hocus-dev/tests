@@ -9,7 +9,8 @@ RUN apt-get update && apt-get install -y \
     openssh-server \
     sudo \
     util-linux \
-    vim
+    vim \
+    git-all
 RUN systemctl enable ssh
 COPY ./docker/dnssetup /etc/init.d/dnssetup
 RUN chmod 755 /etc/init.d/dnssetup && \
