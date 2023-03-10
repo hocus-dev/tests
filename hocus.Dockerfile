@@ -38,3 +38,5 @@ RUN mkdir -p /home/hocus/.ssh && \
     chown -R hocus:hocus /home/hocus/.ssh && \
     chmod 700 /home/hocus/.ssh && \
     chmod 600 /home/hocus/.ssh/authorized_keys
+RUN echo 'set -g default-terminal "tmux-256color"' >> /home/hocus/.tmux.conf
+
