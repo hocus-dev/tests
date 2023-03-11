@@ -1,6 +1,15 @@
-FROM ubuntu:22.04
+FROM gcc:12.2.0 as dtach-builder
 
-RUN apt-get update && apt-get install -y \
+RUN git clone https://github.com/hocus-dev/dtach \
+     && cd dtach \
+     && git checkout 9691ed5322c8e599cce6a3fbcae04ac483fa727f 
+WORKDIR /dtach
+RUN ./configure LDFLAGS="-static -s" CFLAGS="-O3" && make
+
+FROM ubuntu:22.04
+COPY --from=dtach-builder /dtach/dtach /usr/bin/
+RUN dtach --version
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     curl \
     dialog \
     init \
@@ -9,7 +18,9 @@ RUN apt-get update && apt-get install -y \
     openssh-server \
     sudo \
     util-linux \
-    vim
+    vim \
+    tmux \
+    git-all && rm -rf /var/lib/apt/lists/*
 RUN systemctl enable ssh
 COPY ./docker/dnssetup /etc/init.d/dnssetup
 RUN chmod 755 /etc/init.d/dnssetup && \
@@ -27,3 +38,4 @@ RUN mkdir -p /home/hocus/.ssh && \
     chown -R hocus:hocus /home/hocus/.ssh && \
     chmod 700 /home/hocus/.ssh && \
     chmod 600 /home/hocus/.ssh/authorized_keys
+RUN echo 'set -g default-terminal "tmux-256color"' >> /home/hocus/.tmux.conf
