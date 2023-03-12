@@ -20,7 +20,11 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     util-linux \
     vim \
     tmux \
-    git-all && rm -rf /var/lib/apt/lists/*
+    fish \
+    zsh \
+    ash \
+    git-all \
+    git-lfs && rm -rf /var/lib/apt/lists/*
 RUN systemctl enable ssh
 COPY ./docker/dnssetup /etc/init.d/dnssetup
 RUN chmod 755 /etc/init.d/dnssetup && \
@@ -40,3 +44,9 @@ RUN mkdir -p /home/hocus/.ssh && \
     chmod 600 /home/hocus/.ssh/authorized_keys
 RUN echo 'set -g default-terminal "tmux-256color"' >> /home/hocus/.tmux.conf
 
+# Ensure /home/hocus/.ssh/ssh_auth_sock ALWAYS points to a valid symlink :)
+# Motivation: https://gist.github.com/martijnvermaat/8070533 && https://werat.dev/blog/happy-ssh-agent-forwarding/
+COPY ./docker/ssh/rc /home/hocus/.ssh/rc
+RUN chmod 700 /home/hocus/.ssh/rc && chown hocus:hocus /home/hocus/.ssh/rc
+COPY ./docker/ssh/on_ssh_disconnect.sh /etc/on_ssh_disconnect.sh
+RUN echo 'session optional pam_exec.so log=/var/log/on_ssh_disconnect.log /etc/on_ssh_disconnect.sh' >> /etc/pam.d/sshd
