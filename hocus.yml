@@ -1,6 +1,6 @@
 image:
   file: hocus.Dockerfile
-  buildContext: ./resources
+  buildContext: ./
 tasks:
   - name: hello world
     init: test -z "this will cause an error"
