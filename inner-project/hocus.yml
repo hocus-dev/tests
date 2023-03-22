@@ -1,6 +1,6 @@
 image:
   file: hocus.Dockerfile
-  buildContext: ../resources
+  buildContext: ./
 tasks:
   - name: inner hello world
     init: echo "inner init" > init.txt
