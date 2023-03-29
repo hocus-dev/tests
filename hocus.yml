@@ -3,8 +3,8 @@ image:
   buildContext: ./resources
 tasks:
   - name: hello world
-    init: echo "init" > init.txt
-    command: echo "command" > command.txt
+    prebuild: echo "init" > init.txt
+    workspace: echo "command" > command.txt
   - name: second task
-    init: echo "init2" > init2.txt
-    command: echo "command2" > command2.txt
+    prebuild: echo "init2" > init2.txt
+    workspace: echo "command2" > command2.txt
