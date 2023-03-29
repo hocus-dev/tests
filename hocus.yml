@@ -3,8 +3,8 @@ image:
   buildContext: ./
 tasks:
   - name: hello world
-    init: test -z "this will cause an error"
-    command: echo "command" > command.txt
+    prebuild: test -z "this will cause an error"
+    workspace: echo "command" > command.txt
   - name: second task
-    init: echo "init2" > init2.txt
-    command: echo "command2" > command2.txt
+    prebuild: echo "init2" > init2.txt
+    workspace: echo "command2" > command2.txt
