@@ -1,3 +1,3 @@
 # Tests
 
-Hello from the demo!
+Hello from the demo! :)
