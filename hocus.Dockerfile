@@ -1,1 +1,1 @@
-FROM hocusdev/workspace
+FROM hocusdev/workspace-base
