@@ -1,1 +1,0 @@
-FROM hocusdev/workspace-base

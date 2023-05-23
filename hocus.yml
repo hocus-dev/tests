@@ -2,9 +2,9 @@ image:
   file: hocus.Dockerfile
   buildContext: ./
 tasks:
-  - name: hello world
-    prebuild: echo "init" > init.txt
-    workspace: echo "command" > command.txt
-  - name: second task
-    prebuild: echo "init2" > init2.txt
-    workspace: echo "command2" > command2.txt
+  - name: sleep1
+    prebuild: sleep 999999
+    workspace: echo "workspace" > workspace.txt
+  - name: sleep2
+    prebuild: sleep 999999
+    workspace: echo "workspace2" > workspace2.txt

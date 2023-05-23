@@ -1,3 +1,3 @@
 # Tests
 
-The `runBuildfsAndPrebuilds` test in `app/agent/workflows.test.ts` depends on this branch.
+The `cancel prebuild` test in `app/agent/tests/workflows.test.ts` depends on this branch.
