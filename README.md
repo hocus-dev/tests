@@ -1,3 +1,3 @@
 # Tests
 
-The `runBuildfsAndPrebuilds` test in `app/agent/workflows.test.ts` depends on this branch.
+The `checkoutAndInspect` test in `app/agent/prebuild.service.test.ts`, and conversely the `buildfs` test in `app/agent/buildfs.service.test.ts`, depend on this branch.
